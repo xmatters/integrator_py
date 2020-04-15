@@ -5,6 +5,10 @@ From within `/integrator_py/src` exists the following scripts available for exec
 * `/integrator_py/src/add_members.py`: Creates groups and add members to created groups
 * `/integrator_py/src/dynamic_teams.py`: Creates dynamic teams
 * `/integrator_py/src/roles.py`: This script is responsible synchronizing roles based on group membership
+* `/integrator_py/src/people.py`: This script is responsible for querying users based on a property name and value to then set the users as inactive
+* `/integrator_py/src/response.py`: This script is responsible for querying xmatters events based on a form name and then outputting to a file the user delivery detail
+* `/integrator_py/src/modify_lanugage.py`: This script is responsible for querying xmatters based on user's site affiliation and then setting the profile to a different language such as portuguese
+
 
 ## Installation & Required Dependencies
 1. This package was developed for Python3 only, install the latest Python3 stable version here: [https://www.python.org/downloads/](https://www.python.org/downloads/)
@@ -45,36 +49,7 @@ The role synchronization is designed to take a JSON format like below and based 
 ```
 
 ### Configuration
-To configure the role sync, open the `config.py`. Below are the configurations available. The integration is designed to leverage a _Library_ in xMatters so that a user can define the role mapping in a Web interface without having to access a server. Or the role mapping can be accomplished using a local JSON file. The JSON file must match the structure outlined above.
-```
-environment = {
-    "url": "https://<instance>.xmatters.com",  # ensure that there's no / at the end
-    "username": "username",
-    "password": "password"
-}
-
-role_mapping = {
-    "enable_web_ui": True,
-    "plan_name": "Script Runner",  # only leveraged if enable_web_ui is true
-    "library_name": "Role Mapping",  # only leveraged if enable_web_ui is true
-    "local_file_name": ""  # only leveraged if enable_web_ui is false
-}
-
-logging = {
-    "file_name": "log.log", # absolute path recommended for Windows, Linux can remain as is
-    "max_bytes": 16 * 1024 * 1024, # 16mb is default
-    "back_up_count": 2,
-    "level": 20
-    # Log Levels Integers
-    # Critical: 50
-    # Error:	40
-    # Warning:	30
-    # Info:	20
-    # Debug:	10
-    # Not Set:	0
-}
-
-```
+To configure the role sync, open the `config.py`. 
 
 ### Automation
 To automate this process, it is recommended to leverage a Windows Task Scheduler. If this solution is not viable, an alternative option is to leverage the xMatters Agent and utilize `xm-shell`, which is documented here: https://help.xmatters.com/ondemand/xmodwelcome/xmattersagent/writing-xmatters-agent-scripts.htm
